@@ -103,7 +103,6 @@
 }
 
 .slick-dots {
-  position: absolute;
   bottom: -25px;
   list-style: none;
   display: block;
@@ -156,14 +155,14 @@
   font-size: 6px;
   line-height: 20px;
   text-align: center;
-  color: black;
+  color: transparent;
   opacity: 0.25;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 .slick-dots li.slick-active button:before {
-  color: black;
+  color: transparent;
   opacity: 0.75;
 }
 /*# sourceMappingURL=slick-theme.css.map */

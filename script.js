@@ -1,36 +1,66 @@
 $(document).ready(function () {
-	$(".myslider").slick({
-		arrows: false,
+	$(".news-slider").slick({
+		slidesToShow: 3,
+		slidesToScroll: 1,
+		arrows: true,
 		dots: true,
-		infinite: false,
-		speed: 300,
-		slidesToShow: 1,
+		autoplay: true,
+		autoplaySpeed: 4000,
+		infinite: true,
+		prevArrow:
+			'<span class="slide-arrow prev-arrow"><i class="fas fa-angle-left logos__icon"></i></span>',
+		nextArrow:
+			'<span class="slide-arrow next-arrow"><i class="fas fa-angle-right logos__icon"></i></span>',
 	});
 });
 
-$(".news-slider").slick({
-	infinite: true,
-	slidesToShow: 3,
-	slidesToScroll: 1,
-	dots: true,
-	arrows: true,
+$(document).ready(function () {
+	$(".myslider").slick({
+		arrows: false,
+		dots: true,
+		//infinite: false,
+		infinite: true,
+		prevArrow:
+			'<span class="slide-arrow prev-arrow"><i class="fas fa-angle-left logos__icon"></i></span>',
+		nextArrow:
+			'<span class="slide-arrow next-arrow"><i class="fas fa-angle-right logos__icon"></i></span>',
+		speed: 300,
+		slidesToShow: 1,
+		verticalSwiping: true,
+		vertical: true,
+	});
+});
+
+document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+	anchor.addEventListener("click", function (e) {
+		e.preventDefault();
+		document.querySelector(this.getAttribute("href")).scrollIntoView({
+			behavior: "smooth",
+		});
+	});
 });
 
 function initMap() {
 	let location = { lat: 58.38577, lng: 13.65044 };
 	let map = new google.maps.Map(document.getElementById("map"), {
 		zoom: 4,
-		center: location,
 	});
 	let marker = new google.maps.marker({
 		position: location,
 		map: map,
 	});
+	let infoWindow = new google.maps.infoWindow({
+		content: "<h1>Värnhem</h1>",
+	});
+
+	marker.addListener("click", function () {
+		infoWindow.open(map, marker);
+	});
 }
 
 let map = new google.maps.Map(document.getElementById("map"), {
 	center: { lat: 58.38577, lng: 13.65044 },
-	zoom: 16,
+	zoom: 4,
 	styles: [
 		{
 			elementType: "geometry",
@@ -235,7 +265,7 @@ let marker = new google.maps.Marker({
 	icon: "./images/marker.png",
 });
 
-$(function () {
+$(form).ready(function () {
 	$("form[name='form']").validate({
 		rules: {
 			name: "required",
@@ -245,11 +275,18 @@ $(function () {
 			},
 		},
 		messages: {
-			name: "Enter your name",
-			email: "Enter a valid email address",
+			name: "Please enter your name",
+			email: "Please enter a valid email address",
 		},
 		submitHandler: function (form) {
-			form.submit();
+			$(form).ready(function () {
+				$("#btn-submit").click(function () {
+					return "Thank you, we will contact you!";
+				});
+				$("#btn-submit").click(function (event) {
+					$(".contact-right").html(event.result);
+				});
+			});
 		},
 	});
 });
